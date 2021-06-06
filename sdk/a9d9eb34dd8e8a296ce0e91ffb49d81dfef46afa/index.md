@@ -133,6 +133,8 @@ For example, users are able to edit the current instrument configuration paramet
 <img src="./device_configs_edit.png">
 <img src="./device_configs.png">
 
+See this [demo](monomerbio.com/demo) for an example of Monomer's [Liquid Monitor Station](https://monomerbio.com/datasheet/a9d9eb34dd8e8a296ce0e91ffb49d81dfef46afa/index.html) instrument software, built with an early version of oour SDK.
+
 ### Custom applications
 
 A whole host of custom applications can be built on top of the instrument APIs. Monomer is also working on libraries and tools for building browser-based user interfaces and data visualizations.
