@@ -133,7 +133,7 @@ For example, users are able to edit the current instrument configuration paramet
 <img src="./device_configs_edit.png">
 <img src="./device_configs.png">
 
-See this [demo](monomerbio.com/demo) for an example of Monomer's [Liquid Monitor Station](https://monomerbio.com/datasheet/a9d9eb34dd8e8a296ce0e91ffb49d81dfef46afa/index.html) instrument software, built with an early version of our SDK.
+See this [demo](http://monomerbio.com/demo) for an example of Monomer's [Liquid Monitor Station](https://monomerbio.com/datasheet/a9d9eb34dd8e8a296ce0e91ffb49d81dfef46afa/index.html) instrument software, built with an early version of our SDK. Password is "Skipthesalescall" for both sites.
 
 ### Custom applications
 
