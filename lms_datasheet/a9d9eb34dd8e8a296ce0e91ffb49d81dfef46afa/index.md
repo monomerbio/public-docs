@@ -52,3 +52,6 @@ Landscape mode (12 sensors): 420 mA
 | --- | --- | --- | --- | --- | --- | --- |
 | Micronic 1.40 ml tubes | 2 | 2 | 20 | 20 | 1400 | Determined by independent party (Ginkgo Bioworks) |
 | 384-well v-bottom (Greiner 781281) | 2.77 | 2.38 | 0.36 | 3.10 | 130 | Data [here](https://docs.google.com/document/d/1xa1agUKM6j7AEhJUsV0nxv9B_zC90GpxH8dsF34MA1M/edit) |
+
+### References
+For more information about our plans with this product line see our product datasheet [here](https://docs.google.com/presentation/d/1XD-4vrDxp0sxiOdbVuHzs_R2GS1VYfyAlvrMT2-UBW8/edit#slide=id.gdebd1e86e6_0_90).
