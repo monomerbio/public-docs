@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Liquid Monitor Station gRPC API Reference</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #999;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0; /* No indent on first p in td */
+      }
+
+      .header {
+        margin-top: 30px;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .header-text {
+        flex: 1 1 0;
+      }
+
+      .logo {
+        width: 200px;
+      }
+
+      .title {
+        font-size: 2em;
+      }
+
+      .version-number {
+        color: #999;
+      }
+
+      /* Table of contents */
+      .toc-title {
+        color: #222;
+      }
+
+      .toc-file {
+        margin-top: 10px;
+      }
+
+      .toc-file:first-child {
+        margin-top: 0;
+      }
+
+      #toc-container {
+        display: flex;
+      }
+
+      #toc {
+        flex: 1 1 0;
+      }
+
+      .device-image {
+          width: 300px;
+          object-fit: contain;
+      }
+
+      .service-name, .enum-name, .message-name {
+        margin-top: 30px;
+      }
+
+      /* Table of fields */
+      .field-table td:nth-child(1) { /* Field */
+        width: 10em;
+      }
+      .field-table td:nth-child(2) { /* Type */
+        width: 10em;
+      }
+      .field-table td:nth-child(3) { /* Label */
+        width: 6em;
+      }
+      .field-table td:nth-child(4) { /* Description */
+        width: auto;
+      }
+
+      /* Table of extensions */
+      .extension-table td:nth-child(1) { /* Extension */
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) { /* Type */
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) { /* Base */
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) { /* Number */
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) { /* Description */
+        width: auto;
+      }
+
+      /* Table of enum values. */
+      .enum-table td:nth-child(1) { /* Name */
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) { /* Number */
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) { /* Description */
+        width: auto;
+      }
+
+      /* Table of scalar value types. */
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+      /* Table of contents. */
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+      /* File heading div */
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+      /* The 'M', 'E' and 'X' badges in the ToC */
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #999;
+        background-color: #eee;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #ccc;
+        border-radius: 1ex;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="header">
+      <div class="header-text">
+        <div class="title">Liquid Monitor Station gRPC API Reference</div>
+        <div class="version-number">Version 1.0.3</div>
+      </div>
+      <img class="logo" src="logo_light.svg" alt="triangle with all three sides equal">
+    </div>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+
+
+          <li class="toc-file">
+            <a class="toc-title" href="#lms.proto">lms.proto</a>
+            <ul>
+
+                <li>
+                  <a href="#LiquidMonitorStation"><span class="badge">S</span>LiquidMonitorStation</a>
+                </li>
+
+
+                <li>
+                  <a href="#CommandRequest.Command"><span class="badge">E</span>CommandRequest.Command</a>
+                </li>
+
+
+
+                  <li>
+                    <a href="#CalibrationValuesReply"><span class="badge">M</span>CalibrationValuesReply</a>
+                  </li>
+
+
+
+                  <li>
+                    <a href="#CommandRequest"><span class="badge">M</span>CommandRequest</a>
+                  </li>
+
+
+
+
+
+                  <li>
+                    <a href="#DriverVersion"><span class="badge">M</span>DriverVersion</a>
+                  </li>
+
+
+
+
+
+                  <li>
+                    <a href="#ProcessValueReply"><span class="badge">M</span>ProcessValueReply</a>
+                  </li>
+
+
+
+            </ul>
+          </li>
+
+
+          <li class="toc-file">
+            <a class="toc-title" href="#shared.proto">shared.proto</a>
+            <ul>
+
+
+                <li>
+                  <a href="#CommandReply.CommandResult"><span class="badge">E</span>CommandReply.CommandResult</a>
+                </li>
+
+                <li>
+                  <a href="#StatusReply.DeviceStatus"><span class="badge">E</span>StatusReply.DeviceStatus</a>
+                </li>
+
+
+
+                  <li>
+                    <a href="#BooleanReply"><span class="badge">M</span>BooleanReply</a>
+                  </li>
+
+
+
+                  <li>
+                    <a href="#CommandReply"><span class="badge">M</span>CommandReply</a>
+                  </li>
+
+
+
+                  <li>
+                    <a href="#StatusReply"><span class="badge">M</span>StatusReply</a>
+                  </li>
+
+
+
+            </ul>
+          </li>
+
+        <li class="toc-file">
+          <a class="toc-title" href="#scalar-value-types">Scalar Value Types</a>
+        </li>
+      </ul>
+      <img class="device-image" src="IntelliXCap_and_Inline_Sensor_Station.jpg" alt="IntelliXCap and Inline Sensor Station">
+    </div>
+
+
+
+      <div class="file-heading">
+        <h2 id="lms.proto">lms.proto</h2><a href="#title">Top</a>
+      </div>
+      <p>Defines the interface for a gRPC server for the Liquid Monitor Station.</p><p>Works well with labs running a PLC/SCADA architecture.</p>
+
+
+        <h3 class="service-name" id="LiquidMonitorStation">LiquidMonitorStation</h3>
+        <p>The gRPC server that handles commands to the Liquid Monitor Station.</p><p>This service is the primary endpoint clients will interact with.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+
+
+                <tr>
+                  <td>GetStatus</td>
+                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
+                  <td><a href="#StatusReply">StatusReply</a></td>
+                  <td><p>Returns the current status of the device.
+stateFlags:
+1 << 0 - Whether device has been Initialized.
+1 << 1 - Whether CalibrateZ has been run.
+1 << 2 - Whether CalibrateTubes has been run.
+1 << 3 - Whether CalibrateVolumes has been run.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>ExecuteCommand</td>
+                  <td><a href="#CommandRequest">CommandRequest</a></td>
+                  <td><a href="#CommandReply">CommandReply</a></td>
+                  <td><p>Executes a command on the sensor.
+Returns whether the command was accepted by the sensor.
+The command will run asynchronously after the response is returned.
+You should ping GetStatus to determine if the command ran successfully.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>GetProcessValues</td>
+                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
+                  <td><a href="#ProcessValueReply">ProcessValueReply</a></td>
+                  <td><p>Returns the calculated volumes from the most recent scan.
+Returns an error if the last scan was not successful.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>GetLatestCalibrationValues</td>
+                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
+                  <td><a href="#CalibrationValuesReply">CalibrationValuesReply</a></td>
+                  <td><p>Returns the most recent values from the calibration procedure.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>GetDriverVersion</td>
+                  <td><a href="#google.protobuf.Empty">google.protobuf.Empty</a></td>
+                  <td><a href="#DriverVersion">DriverVersion</a></td>
+                  <td><p>Returns the version of the gRPC server and device driver.</p></td>
+                </tr>
+
+
+
+
+
+
+          </tbody>
+        </table>
+
+
+
+
+        <h3 class="enum-name" id="CommandRequest.Command">CommandRequest.Command</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+
+
+                <tr>
+                  <td>Initialize</td>
+                  <td>0</td>
+                  <td><p>Connect to and configure sensors. Must be called before Read or Calibrate.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Read</td>
+                  <td>1</td>
+                  <td><p>Wait for an object to be within range of the sensors, then take a scan of pre-determined duration.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>CalibrateZ</td>
+                  <td>2</td>
+                  <td><p>Calibrate the distance from the sensors to the platform upon which the tube rack will be placed.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>CalibrateTubes</td>
+                  <td>3</td>
+                  <td><p>Calibrate the speed at which the rack of tubes moves through the device and measure various dimensions.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>CalibrateVolumes</td>
+                  <td>4</td>
+                  <td><p>Calibrate the relationship between sensor distance measurements and liquid volume.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Reconnect</td>
+                  <td>99</td>
+                  <td><p>Attempt to reconnect to the sensors if a connection issue arises.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>AcknowledgeMessages</td>
+                  <td>100</td>
+                  <td><p>Acknowledge any errors and allow the device to recover from a fault.</p></td>
+                </tr>
+
+
+
+
+
+
+
+
+          </tbody>
+        </table>
+
+
+
+
+          <h3 class="message-name" id="CalibrationValuesReply">CalibrationValuesReply</h3>
+          <p>The response message for GetLatestCalibrationValues.</p><p>Only the values from CalibrateVolumes are returned. These values are intrinsic to the type of labware being scanned,</p><p>so it is possible to reuse these values across Liquid Monitor Stations.</p><p>GetLatestCalibrationValues enables this workflow.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>ok</td>
+                    <td><a href="#bool">bool</a></td>
+                    <td></td>
+                    <td><p>Whether there is an error. For example, if there are no valid calibration values to return. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>debugMessage</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>A debug message if there is an error. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>slope</td>
+                    <td><a href="#double">double</a></td>
+                    <td></td>
+                    <td><p>The slope calibration value from CalibrateVolumes. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>intercept</td>
+                    <td><a href="#double">double</a></td>
+                    <td></td>
+                    <td><p>The intercept calibration value from CalibrateVolumes. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+          <h3 class="message-name" id="CommandRequest">CommandRequest</h3>
+          <p>The request message for ExecuteCommand.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>command</td>
+                    <td><a href="#CommandRequest.Command">CommandRequest.Command</a></td>
+                    <td></td>
+                    <td><p>The command to be run. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>id</td>
+                    <td><a href="#int32">int32</a></td>
+                    <td></td>
+                    <td><p>A unique ID for the command. Will be returned in StatusReply. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>commandParameter</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>Additional arguments to be passed to the command. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+          <h3 class="message-name" id="DriverVersion">DriverVersion</h3>
+          <p>The response message for GetDriverVersion.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>version</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>The current version of the gRPC server, e.g. "1.0.0". </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+          <h3 class="message-name" id="ProcessValueReply">ProcessValueReply</h3>
+          <p>The response message for GetProcessValues.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>ok</td>
+                    <td><a href="#bool">bool</a></td>
+                    <td></td>
+                    <td><p>Whether the last scan succeeded. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>debugMessage</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>A debug message if the last scan failed. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>volumes</td>
+                    <td><a href="#double">double</a></td>
+                    <td>repeated</td>
+                    <td><p>An flattened array representing the calculated volumes from the last scan.
+All volumes scanned by the first sensor will be listed first, then the second sensor, etc. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="file-heading">
+        <h2 id="shared.proto">shared.proto</h2><a href="#title">Top</a>
+      </div>
+      <p>Messages that are shared between gRPC servers for all Monomer devices.</p>
+
+
+
+
+        <h3 class="enum-name" id="CommandReply.CommandResult">CommandReply.CommandResult</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+
+
+                <tr>
+                  <td>Accepted</td>
+                  <td>0</td>
+                  <td><p>Indicates that the command was accepted.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Rejected</td>
+                  <td>1</td>
+                  <td><p>Indicates that the command was rejected. For example, the device is busy or faulted.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>DeviceOffline</td>
+                  <td>2</td>
+                  <td><p>Indicates that the command was rejected because the device is offline.</p></td>
+                </tr>
+
+
+          </tbody>
+        </table>
+
+        <h3 class="enum-name" id="StatusReply.DeviceStatus">StatusReply.DeviceStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+
+
+                <tr>
+                  <td>Disconnected</td>
+                  <td>0</td>
+                  <td><p>Indicates that the device is disconnected.
+Execute the Reconnect command to attempt to reconnect.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Faulted</td>
+                  <td>-1</td>
+                  <td><p>Indicates that the device has faulted and intervention by an operator is needed.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Ready</td>
+                  <td>1</td>
+                  <td><p>Indicates that the device is ready to receive commands.</p></td>
+                </tr>
+
+
+
+                <tr>
+                  <td>Busy</td>
+                  <td>2</td>
+                  <td><p>Indicates that the device is busy executing a command.
+If another command is sent while the device is Busy, the command will be rejected.</p></td>
+                </tr>
+
+
+          </tbody>
+        </table>
+
+
+
+
+          <h3 class="message-name" id="BooleanReply">BooleanReply</h3>
+          <p>A general-purpose boolean response message.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>ok</td>
+                    <td><a href="#bool">bool</a></td>
+                    <td></td>
+                    <td><p>Whether the gRPC call was successful. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>debugMessage</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>A debug message if the call was not successful. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+          <h3 class="message-name" id="CommandReply">CommandReply</h3>
+          <p>The response message for ExecuteCommand.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>result</td>
+                    <td><a href="#CommandReply.CommandResult">CommandReply.CommandResult</a></td>
+                    <td></td>
+                    <td><p>Whether the command was accepted by the device. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>debugMessage</td>
+                    <td><a href="#string">string</a></td>
+                    <td></td>
+                    <td><p>A debug message if the command was not accepted. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+          <h3 class="message-name" id="StatusReply">StatusReply</h3>
+          <p>The response message for GetStatus.</p>
+
+
+            <table class="field-table">
+              <thead>
+                <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+              </thead>
+              <tbody>
+
+                  <tr>
+                    <td>status</td>
+                    <td><a href="#StatusReply.DeviceStatus">StatusReply.DeviceStatus</a></td>
+                    <td></td>
+                    <td><p>The current status of the device. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>stateFlags</td>
+                    <td><a href="#int32">int32</a></td>
+                    <td></td>
+                    <td><p>A bit field that encodes device specific state in its bits. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>stateUnknownMask</td>
+                    <td><a href="#int32">int32</a></td>
+                    <td></td>
+                    <td><p>A bit field that encodes whether device is uncertain about portion of stateFlags. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>lastAcceptedCommandId</td>
+                    <td><a href="#int32">int32</a></td>
+                    <td></td>
+                    <td><p>The last accepted command id. If the device is Busy, this is the command it is processing. </p></td>
+                  </tr>
+
+                  <tr>
+                    <td>messages</td>
+                    <td><a href="#string">string</a></td>
+                    <td>repeated</td>
+                    <td><p>Messages for the device operator. Includes error messages if the device faults. </p></td>
+                  </tr>
+
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+
+      </tbody>
+    </table>
+  </body>
+</html>
