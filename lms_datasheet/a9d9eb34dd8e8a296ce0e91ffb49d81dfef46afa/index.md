@@ -11,6 +11,7 @@ Add quality control to your assays with Monomer's Liquid Monitor Sensors. These 
 * Measure temperature of samples in individual wells. (In development.)
 * Cross reference with local recordings of temperature and humidity. (In development.)
 
+<!---
 ## Inline Device Compatibility
 <img src="./IntelliXCap_and_Inline_Sensor_Station.png" width="450"> <img src="./Multidrop_and_Inline_Sensor_Station.png" width="450">
 
@@ -18,6 +19,7 @@ Measuring inline ensures *all* dispenses are automatically scanned. Labware is s
 * FluidX IntelliXcap
 * Multidrop Combi SMART (coming soon)
 * PF400 (coming soon)
+-->
 
 ## Interfaces
 * For manual operation use our browser based user interface optimized for collaboration. Try for yourself [here](https://monomerbio.com/demo).
