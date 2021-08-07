@@ -52,7 +52,7 @@ Landscape mode (12 sensors): 420 mA
 ### Volume Accuracy Table
 | Labware Type | Precision [%] | Accuracy [%] | Precision [uL] | Accuracy [uL] | Max Volume [uL] | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| 384-well v-bottom (Greiner 781281) | 2.77 | 2.38 | 0.36 | 3.10 | 130 | Determined for Notable Labs. Data [here](https://docs.google.com/document/d/1jfnU9aFOaHp8EzdTH77EX6o5IjfY-3TiYiGAU8dOLag/edit#) |
+| 384-well v-bottom (Greiner 781281) | 0.28 | 2.38 | 0.36 | 3.10 | 130 | Determined for Notable Labs. Data [here](https://docs.google.com/document/d/1jfnU9aFOaHp8EzdTH77EX6o5IjfY-3TiYiGAU8dOLag/edit#) |
 | Micronic 1.40 ml tubes | <2 | <2 | <20 | <20 | 1400 | Determined by independent party (Ginkgo Bioworks) |
 
 
