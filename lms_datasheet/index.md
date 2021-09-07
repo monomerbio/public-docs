@@ -22,8 +22,8 @@ Measuring inline ensures *all* dispenses are automatically scanned. Labware is s
 -->
 
 ## Interfaces
-* For manual operation use our browser based user interface optimized for collaboration. Try for yourself [here](https://monomerbio.com/demo).
-* For automation use our gRPC interface. The API is open and publicly available [here](https://monomerbio.com/api).
+* For manual operation use our browser based user interface optimized for collaboration. Try for yourself [here](https://staging-app.monomerbio.com/demo/).
+* For automation use our gRPC interface. The API is open and publicly available [here](https://docs.monomerbio.com/api/index.html).
 
 ## Specifications
 
